@@ -14,6 +14,7 @@ def A_CAM_P():
     print("摄像头读取成功。")
     # 显示图像
     cv2.imshow("Camera", jpg)
+    cv2.imwrite("src\img\captured_test.jpg", jpg)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     Open_camrea.release()
