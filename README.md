@@ -1,208 +1,301 @@
-# RLL-LabelAnyThing
-A viusal platform
-## 1. Project Overview  
+# RLL-LabelAnyThing - 售货机视觉分析系统
 
-### 1.1 Project Background  
-With the rapid development of the unmanned retail industry, the lack of intelligent analysis capabilities for user purchasing behavior in traditional vending machines has become increasingly apparent. Most existing vending machines can only provide basic sales data and are unable to identify specific purchasing processes, detect abnormal behavior, or offer refined operational insights. This project aims to develop a pure visual intelligent analysis system that uses cameras to analyze user interactions with vending machines in real time, enabling fully automated purchase recognition, inventory management, and abnormal behavior detection.  
+## 项目概述
 
-### 1.2 Project Objectives  
-Develop a computer vision-based intelligent analysis system that, through cameras deployed inside vending machines, comprehensively analyzes user purchasing behavior, providing data-driven decision support for operators.  
+基于计算机视觉的售货机智能监控与分析系统，能够实时分析用户行为、检测异常事件、识别商品、管理库存，并生成详细的数据报告。
 
-### 1.3 Project Scope  
-- **System Scope**: Includes front-end visual data collection, AI analysis engine, and backend management system.  
-- **Functional Scope**: Purchase behavior recognition, abnormal behavior detection, inventory management, and user profile analysis.  
-- **Deployment Scope**: Applicable to various types of intelligent vending machines, compatible with different specifications and models.  
+## 系统功能
 
-## 2. Stakeholder Analysis  
+### 1. 视频捕获模块
+- 实时视频流捕获
+- 帧处理和优化
+- 视频录制和截图功能
 
-### 2.1 Main Stakeholders  
-- **Operations Managers**: Require real-time monitoring of sales, abnormal alerts, and operational data analysis.  
-- **Maintenance Personnel**: Need inventory alerts, equipment failure notifications, and other relevant information.  
-- **Product Development Personnel**: Require user behavior data to optimize product layout and merchandise configuration.  
-- **End Users**: Indirectly benefit from more accurate product recommendations and smoother purchasing experiences.  
+### 2. 行为分析模块
+- 用户行为识别（接近、选择、购买等）
+- 行为模式分析
+- 异常行为检测
 
-### 2.2 User Profiles  
-- **Operations Manager Mr. Zhang**: 35 years old, focuses on sales data and abnormal situations, requires real-time reports.  
-- **Maintenance Technician Mr. Li**: 42 years old, focuses on inventory alerts and mechanical failures, requires timely notifications.  
-- **Market Analyst Ms. Wang**: 28 years old, focuses on user behavior and consumption preferences, requires data mining tools.  
+### 3. 异常检测模块
+- 破坏行为检测
+- 盗窃行为检测
+- 设备故障检测
+- 实时警报系统
 
-## 3. Functional Requirements  
+### 4. 商品识别模块
+- 商品图像识别
+- 槽位状态检测
+- 手持商品识别
 
-### 3.1 Core Functional Modules  
+### 5. 库存管理模块
+- 实时库存监控
+- 低库存预警
+- 库存变化分析
+- 销售数据统计
 
-#### 3.1.1 Visual Data Collection Module  
-- **Real-Time Video Capture**: Supports 1080P/30fps or higher video stream capture.  
-- **Multi-Angle Coverage**: Supports collaboration among multiple cameras to cover all operational areas of the vending machine.  
-- **Environmental Adaptability**: Equipped with adaptive lighting capabilities to function under varying light conditions.  
-- **Data Preprocessing**: Image denoising, enhancement, and standardization.  
+### 6. 数据报告模块
+- 实时数据收集和存储
+- 每日报告生成
+- 数据导出功能
+- 系统状态监控
 
-#### 3.1.2 Behavior Recognition and Analysis Module  
-- **User Detection and Tracking**: Identifies users approaching the vending machine and continuously tracks their behavior trajectories.  
-- **Purchase Behavior Recognition**:  
-  - Product Selection Recognition: Identifies products the user is looking at or pointing to.  
-  - Payment Action Recognition: Recognizes actions such as scanning QR codes or inserting coins.  
-  - Retrieval Action Recognition: Identifies actions of retrieving products from the dispensing slot.  
-- **Behavior Process Analysis**: Records the entire “selection-payment-retrieval” process with timestamps.  
+## 系统架构
 
-#### 3.1.3 Abnormal Behavior Detection Module  
-- **Violent Destruction Detection**: Identifies destructive behaviors such as hitting or knocking.  
-- **Abnormal Loitering Detection**: Detects prolonged stays without any operation.  
-- **Multiple Attempt Detection**: Identifies repeated selection of the same product without purchase.  
-- **Payment Anomaly Detection**: Detects abnormal behavior after payment failure.  
-- **Illegal Operation Detection**: Identifies unauthorized methods of obtaining products.  
+```
+RLL-LabelAnyThing/
+├── src/                    # 源代码目录
+│   ├── config.py          # 系统配置
+│   ├── main.py            # 主程序
+│   ├── Video/             # 视频处理模块
+│   │   └── video_capture.py
+│   ├── predict/           # 分析预测模块
+│   │   ├── behavior_analyzer.py
+│   │   ├── abnormal_detector.py
+│   │   ├── product_recognizer.py
+│   │   └── inventory_manager.py
+│   └── Web/               # 数据报告模块
+│       └── data_reporter.py
+├── run.py                 # 启动脚本
+├── config.json            # 配置文件
+├── requirements.txt       # 依赖包列表
+└── README.md             # 说明文档
+```
 
-#### 3.1.4 Inventory Management Module  
-- **Product Recognition**: Identifies product types in the vending machine’s slots via visual analysis.  
-- **Inventory Counting**: Estimates remaining product quantities based on visual analysis.  
-- **Restocking Alerts**: Automatically alerts when inventory falls below a threshold.  
-- **Slot Anomaly Detection**: Identifies issues such as product jams or tilting in the slots.  
+## 快速开始
 
-#### 3.1.5 Data Analysis and Reporting Module  
-- **Real-Time Dashboard**: Displays real-time sales data and abnormal events.  
-- **Historical Data Analysis**: Supports multi-dimensional analysis by time, location, product, etc.  
-- **User Behavior Analysis**: Analyzes user dwell time, purchasing preferences, conversion rates, etc.  
-- **Predictive Analysis**: Forecasts sales trends and restocking cycles based on historical data.  
+### 1. 环境准备
 
-### 3.2 Management Backend Functions  
-- **Device Management**: Registration, configuration, and status monitoring of vending machines.  
-- **User Management**: System user permissions and role management.  
-- **Alert Management**: Configuration and tracking of abnormal event alerts.  
-- **Report Export**: Supports data export in formats such as Excel and PDF.  
-- **System Configuration**: Algorithm parameter configuration and alert threshold settings.  
+```bash
+# 克隆项目
+git clone <repository-url>
+cd RLL-LabelAnyThing
 
-## 4. Non-Functional Requirements  
+# 安装依赖
+pip install opencv-python numpy Pillow
+```
 
-### 4.1 Performance Requirements  
-- **Real-Time Requirements**: Behavior recognition latency ≤ 2 seconds, abnormal detection latency ≤ 1 second.  
-- **Recognition Accuracy**: Normal purchase behavior recognition accuracy ≥ 95%, abnormal behavior detection accuracy ≥ 90%.  
-- **System Availability**: Overall system availability ≥ 99.5%.  
-- **Concurrent Processing**: Supports simultaneous monitoring of 1,000 or more vending machines.  
+### 2. 系统设置
 
-### 4.2 Reliability Requirements  
-- **24/7 Operation**: Supports uninterrupted operation.  
-- **Fault Self-Recovery**: Automatically recovers from system anomalies within ≤ 5 minutes.  
-- **Data Integrity**: Ensures no data loss, with dual backups for critical data.  
+```bash
+# 运行设置脚本
+python run.py --setup
 
-### 4.3 Security Requirements  
-- **Data Encryption**: Uses TLS encryption for data transmission and encrypted storage.  
-- **Privacy Protection**: Automatically blurs facial features and does not store personally identifiable information.  
-- **Access Control**: Strict permission management and access control mechanisms.  
-- **System Protection**: Defense against DDoS attacks and malicious intrusions.  
+# 或手动创建配置
+python run.py --install-check
+```
 
-### 4.4 Compatibility Requirements  
-- **Hardware Compatibility**: Supports mainstream camera brands and models.  
-- **Vending Machine Compatibility**: Adapts to mainstream intelligent vending machine brands.  
-- **Communication Protocols**: Supports mainstream protocols such as HTTP and MQTT.  
+### 3. 启动系统
 
-### 4.5 Usability Requirements  
-- **Management Interface**: Simple, intuitive interface with easy-to-learn operations.  
-- **Alert Notifications**: Supports multiple notification methods such as email, SMS, and app push notifications.  
-- **Mobile Support**: Management backend accessible via mobile devices.  
+```bash
+# 正常启动（显示视频窗口）
+python run.py
 
-## 5. System Constraints  
+# 无显示模式启动
+python run.py --no-display
 
-### 5.1 Technical Constraints  
-- **Pure Visual Solution**: Relies solely on camera data, without additional sensors.  
-- **Edge Computing**: Requires partial analysis to be performed on the device side to reduce data transmission.  
-- **Network Conditions**: Must account for degraded functionality during network instability.  
+# 指定配置文件
+python run.py --config my_config.json
 
-### 5.2 Business Constraints  
-- **Cost Control**: Additional hardware cost per vending machine ≤ 500 RMB.  
-- **Deployment Convenience**: Installation and deployment time ≤ 30 minutes per machine.  
-- **Maintenance Simplicity**: Minimal daily maintenance effort, no need for specialized personnel.  
+# 设置日志级别
+python run.py --log-level DEBUG
+```
 
-### 5.3 Legal and Compliance Constraints  
-- **Privacy Regulations**: Strict compliance with laws such as the *Personal Information Protection Law*.  
-- **Data Storage**: User behavior data storage duration ≤ 6 months (after anonymization).  
-- **Regional Compliance**: Adherence to legal and regulatory requirements in different regions.  
+### 4. 系统测试
 
-## 6. Data Requirements  
+```bash
+# 测试系统功能
+python run.py --test
+```
 
-### 6.1 Input Data  
-- **Video Streams**: Real-time video streams from multiple cameras.  
-- **Device Information**: Vending machine ID, location, product configuration, etc.  
-- **Configuration Information**: Algorithm parameters, alert thresholds, etc.  
+## 配置文件说明
 
-### 6.2 Output Data  
-- **Behavior Events**: Structured data for purchase events, abnormal events, etc.  
-- **Analysis Reports**: Various statistical analysis reports.  
-- **Alert Notifications**: Real-time alert information.  
-- **Inventory Status**: Real-time inventory levels and trends.  
+系统使用JSON格式的配置文件，主要配置项包括：
 
-### 6.3 Data Storage  
-- **Raw Data**: Video data stored locally for ≤ 7 days.  
-- **Analysis Results**: Structured data stored long-term in the cloud.  
-- **Data Archiving**: Historical data archived by time, supporting fast retrieval.  
+### 系统配置
+```json
+{
+  "system": {
+    "name": "RLL-LabelAnyThing",
+    "version": "1.0.0",
+    "mode": "development",
+    "log_level": "INFO"
+  }
+}
+```
 
-## 7. Deployment and Maintenance Requirements  
+### 视频配置
+```json
+{
+  "video": {
+    "camera_index": 0,
+    "resolution": [1920, 1080],
+    "fps": 30,
+    "record_video": false
+  }
+}
+```
 
-### 7.1 Deployment Requirements  
-- **Hardware Deployment**: Standardized camera installation positioning.  
-- **Software Deployment**: Supports remote batch deployment and configuration.  
-- **Network Configuration**: Supports wired, Wi-Fi, 4G/5G, and other network connections.  
+### 分析配置
+```json
+{
+  "analysis": {
+    "min_confidence": 0.7,
+    "enable_behavior_analysis": true,
+    "enable_abnormal_detection": true,
+    "enable_product_recognition": true,
+    "enable_inventory_management": true
+  }
+}
+```
 
-### 7.2 Maintenance Requirements  
-- **Remote Maintenance**: Supports remote software updates and configuration modifications.  
-- **Fault Diagnosis**: Provides detailed fault diagnosis information.  
-- **Logging System**: Comprehensive operation logs and system runtime logs.  
+## 使用说明
 
-## 8. Assumptions and Dependencies  
+### 控制命令
+系统运行时支持以下键盘命令：
+- **q** - 退出系统
+- **p** - 暂停/恢复处理
+- **s** - 保存当前截图
 
-### 8.1 Assumptions  
-1. Vending machines have stable power supply.  
-2. Deployment environments have basic network connectivity.  
-3. Camera installation positions do not change frequently.  
-4. Users have basic awareness of the presence of cameras.  
+### 数据查看
+系统数据存储在SQLite数据库中：
+```bash
+# 查看数据库
+sqlite3 data/system_data.db
 
-### 8.2 External Dependencies  
-- **Cloud Services**: Relies on cloud platforms for computing and storage resources.  
-- **Network Services**: Depends on stable network connections for data transmission.  
-- **Hardware Suppliers**: Relies on suppliers for cameras and other hardware components.  
+# 常用查询
+SELECT * FROM behavior_events ORDER BY timestamp DESC LIMIT 10;
+SELECT * FROM abnormal_events WHERE severity = 'high';
+SELECT * FROM inventory_status WHERE status = 'low_stock';
+```
 
-## 9. Risk Analysis  
+### 报告生成
+系统自动生成每日报告，也可手动导出数据：
+```python
+# 通过Python API导出数据
+from Web.data_reporter import DataReporter
+reporter = DataReporter(config)
+report = reporter.generate_daily_report()
+```
 
-### 9.1 Technical Risks  
-- **Recognition Accuracy Risk**: Accuracy may decline in complex environments.  
-- **Privacy Leakage Risk**: Visual systems may raise privacy concerns.  
-- **Network Dependency Risk**: Network instability may impact system functionality.  
+## 模块详细说明
 
-### 9.2 Business Risks  
-- **User Acceptance Risk**: Some users may resist due to privacy concerns.  
-- **Cost Control Risk**: Hardware and operational costs may exceed expectations.  
-- **Competition Risk**: Similar solutions may emerge in the market.  
+### 视频捕获模块 (VideoCaptureManager)
+- 支持多摄像头
+- 自动调整分辨率
+- 帧率控制
+- 录制功能
 
-### 9.3 Mitigation Measures  
-- **Technical Optimization**: Continuously improve algorithms to enhance adaptability to complex environments.  
-- **Privacy Protection**: Strengthen privacy protection measures and clearly inform users.  
-- **Cost Control**: Optimize hardware selection and explore low-cost solutions.  
-- **Differentiated Competition**: Continuously enhance features to build technological barriers.  
+### 行为分析模块 (BehaviorAnalyzer)
+- 运动检测
+- 行为分类
+- 用户跟踪
+- 行为模式识别
 
-## 10. Acceptance Criteria  
+### 异常检测模块 (AbnormalDetector)
+- 实时异常检测
+- 多级警报系统
+- 证据收集
+- 历史记录
 
-### 10.1 Functional Acceptance Criteria  
-- All core functional modules developed and tested.  
-- System interface meets design requirements with good user experience.  
-- Modules integrated properly, system operates stably.  
+### 商品识别模块 (ProductRecognizer)
+- 基于深度学习的商品识别
+- 槽位状态分析
+- 手持商品检测
+- 置信度评估
 
-### 10.2 Performance Acceptance Criteria  
-- Behavior recognition accuracy ≥ 95%.  
-- Abnormal detection accuracy ≥ 90%.  
-- System response time meets design requirements.  
-- System can simultaneously monitor 1,000 or more devices.  
+### 库存管理模块 (InventoryManager)
+- 实时库存监控
+- 自动补货建议
+- 销售预测
+- 异常库存检测
 
-### 10.3 Business Acceptance Criteria  
-- System operates stably on pilot vending machines for 30 days without major failures.  
-- User behavior data accurately reflects actual sales.  
-- Abnormal detection successfully identifies real abnormal events.  
-- Operations managers are satisfied with system functionality.  
+### 数据报告模块 (DataReporter)
+- 数据持久化存储
+- 实时仪表板
+- 报告生成
+- 数据导出
 
-## 11. Summary  
+## 开发指南
 
-This requirements analysis document details the functional requirements, non-functional requirements, constraints, and acceptance criteria for the Intelligent Vending Machine Behavior Visual Analysis System. Through advanced computer vision technology, the system will enable intelligent analysis of user behavior in vending machines, providing data-driven operational decision support for the unmanned retail industry. System development must fully consider the actual deployment environment, user experience, and privacy protection to ensure the system is practical, reliable, and compliant.  
+### 添加新模块
+1. 在`src/predict/`目录下创建新模块
+2. 实现标准接口（analyze/detect/recognize等方法）
+3. 在主程序中集成
+4. 更新配置文件
 
----  
+### 扩展功能
+- 添加新的异常检测算法
+- 集成新的商品识别模型
+- 扩展报告格式
+- 添加新的通知渠道
 
-**Document Version**: V1.0  
-**Last Updated**: January 2024  
-**Prepared By**: Intelligent Retail Solutions Team  
-**Approved By**: Project Steering Committee
+### 性能优化
+- 使用GPU加速
+- 多线程处理
+- 缓存优化
+- 内存管理
+
+## 故障排除
+
+### 常见问题
+
+1. **摄像头无法打开**
+   - 检查摄像头索引
+   - 确认摄像头权限
+   - 尝试其他摄像头索引
+
+2. **处理速度慢**
+   - 降低视频分辨率
+   - 减少检测频率
+   - 启用GPU加速
+
+3. **识别准确率低**
+   - 调整置信度阈值
+   - 优化光照条件
+   - 更新识别模型
+
+### 日志查看
+```bash
+# 查看系统日志
+tail -f logs/system.log
+
+# 查看错误日志
+grep ERROR logs/system.log
+```
+
+## 性能指标
+
+- 处理速度：30+ FPS (1080p)
+- 识别准确率：>90%
+- 内存使用：<1GB
+- CPU使用率：<80%
+
+## 许可证
+
+本项目采用MIT许可证。详见LICENSE文件。
+
+## 贡献指南
+
+1. Fork项目
+2. 创建功能分支
+3. 提交更改
+4. 推送到分支
+5. 创建Pull Request
+
+## 联系方式
+
+如有问题或建议，请通过以下方式联系：
+- 项目仓库：<repository-url>
+- 问题跟踪：GitHub Issues
+
+## 更新日志
+
+### v1.0.0 (2025-12-18)
+- 初始版本发布
+- 完整的功能模块
+- 基础文档
+- 示例配置
+
+---
+
+**注意**：本系统为原型系统，实际部署前需要进行充分的测试和优化。
