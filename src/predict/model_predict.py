@@ -4,13 +4,13 @@ import numpy as np
 
 # 读取图像并进行 Canny 边缘检测
 
-for i in range(1,4):
+for i in range(1,7):
     gray_img = cv2.imread('train_data/'+str(i)+'.png')
     if gray_img is None:
         print("图像读取失败，请检查图像路径。")
         continue
     
-    #cv2.imshow('Original Image '+str(i), gray_img)
+    cv2.imshow('Original Image '+str(i), gray_img)
     
     gray_img = cv2.cvtColor(gray_img,cv2.COLOR_BGR2GRAY)
     edges = cv2.Canny(gray_img,threshold1=50,threshold2= 150)
